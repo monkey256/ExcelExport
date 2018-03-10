@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="tablegen2.layouts.HeaderPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:el="clr-namespace:tablegen2.layouts"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="Transparent" BorderThickness="1" BorderBrush="Gray">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <el:ButtonLight x:Name="btnAddNew" Width="60" Height="24" Margin="0,0,5,0" Content="添加" Click="btnAddNew_Clicked"/>
+                    <el:ButtonLight x:Name="btnAddCopy" IsEnabled="{Binding Editable}" Width="60" Height="24" Margin="0,0,5,0" Content="复制添加" Click="btnAddCopy_Clicked"/>
+                    <el:ButtonLight x:Name="btnEdit" IsEnabled="{Binding Editable}" Width="60" Height="24" Margin="0,0,5,0" Content="编辑" Click="btnEdit_Clicked"/>
+                    <el:ButtonLight x:Name="btnDelete" IsEnabled="{Binding Editable}" Width="60" Height="24" Margin="0,0,5,0" Content="删除" Click="btnDelete_Clicked"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <el:ButtonLight x:Name="btnMoveUp" IsEnabled="{Binding Editable}" Width="60" Height="24" Margin="5 0 0 0" Content="上移↑" Click="btnMoveUp_Clicked"/>
+                    <el:ButtonLight x:Name="btnMoveDown" IsEnabled="{Binding Editable}" Width="60" Height="24" Margin="5 0 0 0" Content="下移↓" Click="btnMoveDown_Clicked"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Background="Transparent" BorderThickness="1,0,1,0" BorderBrush="Gray">
+            <Grid>
+                <el:HeaderListView x:Name="lv" Visibility="Visible"/>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2" Background="#40000000">
+            <TextBlock Text="请填写文件名称：" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"
+                       Visibility="{Binding IsNewFileMode,Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <TextBox x:Name="txtFileName" Height="20" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Margin="110,0,0,0"
+                     Visibility="{Binding IsNewFileMode,Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <el:ButtonDark Content="确定保存" Width="120" Height="30" Margin="0,0,10,0"
+                           HorizontalAlignment="Right" VerticalAlignment="Center" 
+                           FontWeight="Bold" FontSize="16" Click="btnSave_Clicked"/>
+        </Grid>
+    </Grid>
+</UserControl>

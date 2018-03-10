@@ -1,0 +1,54 @@
+﻿<Button x:Class="tablegen2.layouts.ButtonDark"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        mc:Ignorable="d" 
+        d:DesignHeight="30" d:DesignWidth="100"
+        FocusVisualStyle="{x:Null}">
+    <Button.Resources>
+        <SolidColorBrush x:Key="ButtonGrayFill">#BB808080</SolidColorBrush>
+        <SolidColorBrush x:Key="ButtonGrayBorder">#BB404040</SolidColorBrush>
+        <SolidColorBrush x:Key="ButtonGrayText">#FFDDDDDD</SolidColorBrush>
+    </Button.Resources>
+    <Button.Template>
+        <ControlTemplate TargetType="{x:Type Button}">
+            <Grid>
+                <Border 
+                    x:Name="border"
+                    BorderThickness="1" CornerRadius="1"
+                    BorderBrush="{DynamicResource ButtonDarkBorder}"
+                    Background="{DynamicResource ButtonDarkBack}">
+                    <Border x:Name="hover" CornerRadius="1" Background="{DynamicResource ButtonDarkFillHover}" Visibility="Hidden"/>
+                </Border>
+
+                <TextBlock 
+                    x:Name="txt"
+                    TextOptions.TextFormattingMode="Display"
+                    TextOptions.TextRenderingMode="ClearType"
+                    TextOptions.TextHintingMode="Fixed"
+                    Text="{TemplateBinding Content}" Foreground="White"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="{TemplateBinding FontSize}"/>
+            </Grid>
+            
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="hover" Property="Background" Value="{DynamicResource ButtonDarkFillHover}"/>
+                    <Setter TargetName="hover" Property="Visibility" Value="Visible"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="hover" Property="Background" Value="{DynamicResource ButtonDarkFillPressed}"/>
+                    <Setter TargetName="hover" Property="Visibility" Value="Visible"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonGrayBorder}"/>
+                    <Setter TargetName="txt" Property="Foreground" Value="{StaticResource ButtonGrayText}"/>
+                    <Setter TargetName="hover" Property="Background" Value="{StaticResource ButtonGrayFill}"/>
+                    <Setter TargetName="hover" Property="Visibility" Value="Visible"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Button.Template>
+</Button>

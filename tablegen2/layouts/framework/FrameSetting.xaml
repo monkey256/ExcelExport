@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="tablegen2.layouts.FrameSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:el="clr-namespace:tablegen2.layouts"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border Margin="3" BorderThickness="1" BorderBrush="Gray" Background="#80FFFFFF" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="14"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderThickness="1,0,1,1" BorderBrush="Silver" CornerRadius="0,0,10,10" Margin="15,0,15,0" Background="#40FFFFFF">
+                <TextBlock Grid.Row="0" Text="用户设置" Foreground="Gray" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Grid Grid.Row="1">
+                <TextBlock Width="100" TextAlignment="Right" Text="配置目录：" FontSize="12" FontWeight="Bold" VerticalAlignment="Center" Foreground="Gray" HorizontalAlignment="Left"/>
+                <TextBox x:Name="txtExcelDir" Height="20" FontSize="10" Background="White" Foreground="#202020" BorderBrush="#BCC2CF" VerticalAlignment="Center" IsReadOnly="True" Margin="100,0,100,0"/>
+                <el:ButtonLight x:Name="btnBrowseExcelDir" Content="浏览" Width="30" Height="20" HorizontalAlignment="Right" Margin="0,0,68,0" Click="btnBrowseExcelDir_Clicked"/>
+                <el:ButtonLight x:Name="btnOpenExcelDir" Content="打开" Width="30" Height="20" HorizontalAlignment="Right" Margin="0,0,36,0" Click="btnOpenExcelDir_Clicked"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <TextBlock Width="100" TextAlignment="Right" Text="输出目录：" FontSize="12" FontWeight="Bold" VerticalAlignment="Center" Foreground="Gray" HorizontalAlignment="Left"/>
+                <TextBox x:Name="txtExportDir" Height="20" FontSize="10" Background="White" Foreground="#202020" BorderBrush="#BCC2CF" VerticalAlignment="Center" IsReadOnly="True" Margin="100,0,100,0"/>
+                <el:ButtonLight Content="浏览" Width="30" Height="20" HorizontalAlignment="Right" Margin="0,0,68,0" Click="btnBrowseExportDir_Clicked"/>
+                <el:ButtonLight x:Name="btnOpenExportDir" Content="打开" Width="30" Height="20" HorizontalAlignment="Right" Margin="0,0,36,0" Click="btnOpenExportDir_Clicked"/>
+            </Grid>
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <TextBlock Width="100" TextAlignment="Right" Text="输出格式：" FontSize="12" FontWeight="Bold" VerticalAlignment="Center" Foreground="Gray"/>
+                <ComboBox x:Name="cbExportFormat" Width="150" Height="22" FontSize="12" MaxDropDownHeight="200" Margin="0,0,0,0" BorderBrush="{StaticResource CommonBorder}" VerticalContentAlignment="Center">
+                    <ComboBoxItem Height="0" Content="请选择导出格式" Tag="Unknown" Margin="0" IsSelected="True" Visibility="Hidden"/>
+                    <ComboBoxItem Height="20" Content="加密格式" Tag="Dat" Margin="0,1,0,1" Selected="exportFormat_Selected"/>
+                    <ComboBoxItem Height="20" Content="Json格式" Tag="Json" Margin="0,1,0,1" Selected="exportFormat_Selected"/>
+                    <ComboBoxItem Height="20" Content="Xml格式" Tag="Xml" Margin="0,1,0,1" Selected="exportFormat_Selected"/>
+                    <ComboBoxItem Height="20" Content="Lua格式" Tag="Lua" Margin="0,1,0,1" Selected="exportFormat_Selected"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

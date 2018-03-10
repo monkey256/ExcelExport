@@ -1,0 +1,17 @@
+﻿<Window x:Class="tablegen2.layouts.PopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:el="clr-namespace:tablegen2.layouts"
+        mc:Ignorable="d"
+        Title="PopupWindow" Height="300" Width="300"
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="WidthAndHeight"
+        Icon="/tablegen2;component/app.ico"
+        ResizeMode="NoResize" ShowInTaskbar="False"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <Grid x:Name="gridContainer" Background="LightGray">
+        
+    </Grid>
+</Window>

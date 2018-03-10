@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="tablegen2.layouts.FrameToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:el="clr-namespace:tablegen2.layouts"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="400">
+    <UserControl.Background>
+        <LinearGradientBrush StartPoint="0.5,0.1" EndPoint="0.5,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#40FFFFFF" Offset="0.0"/>
+                    <GradientStop Color="#40BBBBBB" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </UserControl.Background>
+    <Grid>
+        <StackPanel Orientation="Horizontal" >
+            <el:ButtonLight x:Name="btnLoad" Margin="4" Content="打开Excel目录..." Width="120" Click="btnOpenExcel_Clicked"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
