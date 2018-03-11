@@ -11,7 +11,7 @@ namespace tablegen2.logic
             const int version = 1;
 
             var ms = new MemoryStream();
-            var bw = new BinaryWriter(ms, Encoding.UTF8, true);
+            var bw = new BinaryWriter(ms, Encoding.UTF8);
             bw.Write(version);
 
             foreach (var hdr in data.Headers)
