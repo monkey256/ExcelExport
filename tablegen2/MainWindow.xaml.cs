@@ -93,10 +93,10 @@ namespace tablegen2
             }
 
             Log.Msg("=================================================");
-            Log.Msg("正在优化 {0}", filePath);
 
             try
             {
+                Log.Msg("正在优化 {0}", filePath);
                 TableExcelData data = TableExcelReader.loadFromExcel(filePath);
                 TableExcelWriter.genExcel(data, filePath);
                 Log.Msg("优化完毕！");
@@ -105,6 +105,31 @@ namespace tablegen2
             {
                 Log.Err(ex.Message);
             }
+        }
+
+        public void rectifyAllFileFormat(List<string> files)
+        {
+            if (files.Count == 0)
+            {
+                Log.Wrn("没有要优化的文件");
+                return;
+            }
+
+            Log.Msg("=================================================");
+            foreach (var filePath in files)
+            {
+                try
+                {
+                    Log.Msg("正在优化 {0}", filePath);
+                    TableExcelData data = TableExcelReader.loadFromExcel(filePath);
+                    TableExcelWriter.genExcel(data, filePath);
+                }
+                catch (System.Exception ex)
+                {
+                    Log.Err(ex.Message);
+                }
+            }
+            Log.Msg("优化完毕！");
         }
 
         public void genSingleFile(string filePath, string exportDir, TableExportFormat fmt)

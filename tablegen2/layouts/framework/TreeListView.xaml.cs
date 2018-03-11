@@ -172,9 +172,9 @@ namespace tablegen2.layouts
                 }
             }
 
-            //优化文件格式
+            //美化Excel格式
             var miRectify = new MenuItem();
-            miRectify.Header = "优化文件格式";
+            miRectify.Header = "美化Excel表";
             miRectify.Click += (_s, _e) => AppData.MainWindow.rectifyFileFormat(item.FullPath);
             menu.Items.Add(miRectify);
             menu.Items.Add(new Separator());
@@ -208,6 +208,12 @@ namespace tablegen2.layouts
                     CreateExcelEvent.Invoke();
             };
             menu.Items.Add(miCreate);
+            menu.Items.Add(new Separator());
+
+            var miExcelFormat = new MenuItem();
+            miExcelFormat.Header = "一键美化Excel表";
+            miExcelFormat.Click += (_s, _e) => AppData.MainWindow.rectifyAllFileFormat(AllExcels.ToList());
+            menu.Items.Add(miExcelFormat);
             menu.Items.Add(new Separator());
 
             var miExplorer = new MenuItem();
