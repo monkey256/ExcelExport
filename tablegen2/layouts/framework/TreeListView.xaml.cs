@@ -17,6 +17,7 @@ namespace tablegen2.layouts
     {
         private TreeListItem selectedItem_ = null;
         public event Action SelectedChangedEvent;
+        public event Action CreateExcelEvent;
 
         public TreeListView()
         {
@@ -40,7 +41,7 @@ namespace tablegen2.layouts
             {
                 _selectItem(null);
                 wp.Children.Clear();
-                txtEmpty.Visibility = Visibility.Visible;
+                spEmpty.Visibility = Visibility.Visible;
             }
             else
             {
@@ -51,7 +52,7 @@ namespace tablegen2.layouts
                 files = files.Union(Directory.GetFiles(dir, "*.xlsx", SearchOption.TopDirectoryOnly)).ToList();
                 files.Sort((a, b) => string.Compare(Path.GetFileNameWithoutExtension(a), Path.GetFileNameWithoutExtension(b), true));
 
-                txtEmpty.Visibility = files.Count == 0 ? Visibility.Visible : Visibility.Hidden;
+                spEmpty.Visibility = files.Count == 0 ? Visibility.Visible : Visibility.Hidden;
                 foreach (var fullPath in files)
                 {
                     if (Path.GetFileName(fullPath).StartsWith("~$"))
@@ -79,6 +80,11 @@ namespace tablegen2.layouts
             _flipMenuWithBackground();
         }
 
+        private void btnCreateExcel_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (CreateExcelEvent != null)
+                CreateExcelEvent.Invoke();
+        }
 
         #region 辅助函数
         private void _selectItem(TreeListItem item)
@@ -193,6 +199,15 @@ namespace tablegen2.layouts
             miRefresh.Header = "刷新(_E)";
             miRefresh.Click += (_s, _e) => refreshByDir(AppData.Config.ExcelDir);
             menu.Items.Add(miRefresh);
+
+            var miCreate = new MenuItem();
+            miCreate.Header = "创建Excel表...";
+            miCreate.Click += (_s, _e) =>
+            {
+                if (CreateExcelEvent != null)
+                    CreateExcelEvent.Invoke();
+            };
+            menu.Items.Add(miCreate);
             menu.Items.Add(new Separator());
 
             var miExplorer = new MenuItem();

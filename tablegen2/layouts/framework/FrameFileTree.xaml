@@ -20,7 +20,7 @@
                        VerticalAlignment="Center" HorizontalAlignment="Left" 
                        Margin="5,0,40,0" TextWrapping="Wrap" Foreground="Gray"
                        FontSize="10"/>
-                <el:ButtonLight Width="24" Height="24" Content="+" FontSize="20"
+                <el:ButtonLight x:Name="btnAddExcel" Width="24" Height="24" Content="+" FontSize="20"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"
                                 Margin="0,2,5,2" ToolTip="新建配置表" Click="btnAddExcel_Clicked"/>
             </Grid>

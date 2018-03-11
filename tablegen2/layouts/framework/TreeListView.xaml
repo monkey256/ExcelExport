@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:tablegen2.layouts"
+             xmlns:el="clr-namespace:tablegen2.layouts"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock x:Name="txtEmpty" Text="该目录下没有Excel文件" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ScrollViewer x:Name="sv" Margin="0" Focusable="False"
                       HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Auto"
@@ -17,5 +16,9 @@
                 <WrapPanel x:Name="wp" Orientation="Vertical" Margin="3,0,3,3"/>
             </StackPanel>
         </ScrollViewer>
+        <StackPanel x:Name="spEmpty" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="该目录下没有Excel文件" Foreground="Gray" IsHitTestVisible="False" HorizontalAlignment="Center"/>
+            <el:ButtonDark Width="100" Height="24" Content="新建Excel表..." Margin="5" Click="btnCreateExcel_Clicked"/>
+        </StackPanel>
     </Grid>
 </UserControl>

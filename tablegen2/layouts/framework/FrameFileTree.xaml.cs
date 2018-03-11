@@ -18,6 +18,7 @@ namespace tablegen2.layouts
             InitializeComponent();
             if (AppData.Config != null)
                 refreshExcelPath(AppData.Config.ExcelDir);
+            lv.CreateExcelEvent += () => Util.performClick(btnAddExcel);
         }
 
         public IEnumerable<string> AllExcels
