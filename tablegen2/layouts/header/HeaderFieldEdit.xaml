@@ -21,7 +21,7 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Text="字段名称：" Foreground="Gray" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="字段类型：" Foreground="Gray" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="字段描述：" Foreground="Gray" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtFieldName" Text="{Binding FieldName}" IsReadOnly="{Binding IsFieldNameReadonly}" Height="20" FontSize="10" Background="White" Foreground="#202020" BorderBrush="#BCC2CF" VerticalAlignment="Center" Margin="10,0,20,0"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtFieldName" Text="{Binding FieldName}" IsReadOnly="{Binding IsFieldNameReadonly}" Height="20" FontSize="12" FontWeight="Bold" Background="White" Foreground="#202020" BorderBrush="#BCC2CF" VerticalAlignment="Center" Margin="10,0,20,0"/>
         <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cbFieldType" FontWeight="Bold" Height="22" FontSize="12" MaxDropDownHeight="200" Margin="10,0,20,0" BorderBrush="{StaticResource CommonBorder}" VerticalContentAlignment="Center">
             <ComboBoxItem Height="20" Content="string" Tag="string" IsSelected="True" Margin="0,1,0,1"/>
             <ComboBoxItem Height="20" Content="int" Tag="int" Margin="0,1,0,1"/>
