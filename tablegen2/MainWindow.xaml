@@ -9,6 +9,7 @@
         Icon="/tablegen2;component/app.ico"
         MinWidth="500" MinHeight="400"
         WindowStartupLocation="CenterScreen"
+        PreviewKeyUp="Window_PreviewKeyUp"
         Background="#BBBBBB">
     <Grid>
         <Grid.RowDefinitions>
@@ -38,7 +39,8 @@
 
         <Grid Grid.Row="3" Background="#EEEEEE">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <el:ButtonDark x:Name="btnGenAll" Width="150" Height="36" Margin="0,0,5,0" Content="请选择生成的数据格式" Tag="一键生成{0}格式" Click="btnGenAll_Clicked"/>
+                <el:ButtonLight Content="使用帮助 (F1)" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,5,0" Click="btnHelp_Clicked"/>
+                <el:ButtonDark x:Name="btnGenAll" Width="150" Height="36" Margin="5,0,5,0" Content="请选择生成的数据格式" Tag="一键生成{0}格式" Click="btnGenAll_Clicked"/>
             </StackPanel>
         </Grid>
     </Grid>

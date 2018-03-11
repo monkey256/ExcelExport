@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="tablegen2.layouts.HelperPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:el="clr-namespace:tablegen2.layouts"
+             mc:Ignorable="d" 
+             Width="500" Height="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#80000000">
+            <TextBlock Text="使用说明" Foreground="White"
+                       FontSize="16" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="#60000000">
+            <ScrollViewer x:Name="sv" Margin="5"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <TextBlock x:Name="txt" TextWrapping="Wrap" FontSize="12" Foreground="Yellow" 
+                               FontWeight="Bold" Text="" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2" Background="#50000000">
+            <Button Content="关闭" Width="80" Height="30"
+                    FontSize="15" FontWeight="Bold"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Margin="0,0,10,0"
+                    Click="btnClose_Click"/>
+            <TextBlock Text="有疑问请联系：monkey256@qq.com" Foreground="Silver"
+                       FontSize="12" FontWeight="Normal" Margin="10,0,0,0"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>
