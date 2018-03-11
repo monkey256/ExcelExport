@@ -143,7 +143,7 @@ namespace tablegen2
                 return;
             }
 
-            if (string.IsNullOrEmpty(excelDir) || !Directory.Exists(excelDir))
+            if (string.IsNullOrEmpty(exportDir) || !Directory.Exists(exportDir))
             {
                 Log.Err("请选择合法的导出目录！");
                 return;
