@@ -1,4 +1,5 @@
-﻿namespace tablegen2.layouts
+﻿using System.IO;
+namespace tablegen2.layouts
 {
     /// <summary>
     /// TreeListItem.xaml 的交互逻辑
@@ -16,7 +17,14 @@
         {
             FullPath = fullPath;
             txtName.Text = System.IO.Path.GetFileName(fullPath);
-            txtDesc.Text = Util.ToFormatLength(0);
+
+            var desc = "未知大小";
+            if (File.Exists(fullPath))
+            {
+                var fi = new FileInfo(fullPath);
+                desc = Util.ToFormatLength(fi.Length);
+            }
+            txtDesc.Text = desc;
         }
     }
 }
