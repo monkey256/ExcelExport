@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="tablegen2.layouts.FrameSettingMore"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:el="clr-namespace:tablegen2.layouts"
+             mc:Ignorable="d" 
+             Height="Auto" Width="300">
+    <Grid Background="#60FFFFFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="1,0,1,1" BorderBrush="Silver" CornerRadius="0,0,10,10" Margin="15,0,15,0" Background="#40FFFFFF">
+            <TextBlock Grid.Row="0" Text="更多设置" Foreground="Gray" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="字段工作簿名称：" FontSize="12" Foreground="Gray"
+                   ToolTip="用于约定Excel表中字段信息所在的工作簿名称。"/>
+        <TextBox x:Name="txtSheetField" Grid.Row="1" Grid.Column="1" Height="20" FontSize="10" MaxLength="20" VerticalAlignment="Center" Margin="5,0,10,0"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="数据工作簿名称：" FontSize="12" Foreground="Gray"
+                   ToolTip="用于约定Excel表中数据信息所在的工作簿名称。"/>
+        <TextBox x:Name="txtSheetData" Grid.Row="2" Grid.Column="1" Height="20" FontSize="10" MaxLength="20" VerticalAlignment="Center" Margin="5,0,10,0"/>
+        
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="#40000000">
+            <el:ButtonDark Content="保存" Width="80" Height="24" Margin="0,0,10,0"
+                           HorizontalAlignment="Right" VerticalAlignment="Center" 
+                           FontWeight="Bold" FontSize="12" Click="btnSave_Clicked"/>
+        </Grid>
+    </Grid>
+</UserControl>

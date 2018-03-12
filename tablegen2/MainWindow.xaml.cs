@@ -22,6 +22,7 @@ namespace tablegen2
             
             setting.ExcelDirChanged += () => tree.refreshExcelPath(AppData.Config.ExcelDir);
             setting.ExportFormatChanged += () => refreshButtonGenAll();
+            setting.MoreSettingEvent += () => _flipMoreSettingPanel();
             tree.OpenExcelRequest += () => setting.browseExcelDirectory();
 
             if (AppData.Config != null)
@@ -261,6 +262,15 @@ namespace tablegen2
             var pw = new PopupWindow(hp);
             pw.Owner = Window.GetWindow(this);
             pw.Title = "使用说明";
+            pw.ShowDialog();
+        }
+
+        private void _flipMoreSettingPanel()
+        {
+            var fsm = new FrameSettingMore();
+            var pw = new PopupWindow(fsm);
+            pw.Owner = Window.GetWindow(this);
+            pw.Title = "更多设置";
             pw.ShowDialog();
         }
     }

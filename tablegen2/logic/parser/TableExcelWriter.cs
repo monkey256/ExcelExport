@@ -19,8 +19,8 @@ namespace tablegen2.logic
                 throw new Exception(string.Format("无法识别的文件扩展名 {0}", ext));
 
             var workbook = ext == ".xls" ? (IWorkbook)new HSSFWorkbook() : (IWorkbook)new XSSFWorkbook();
-            var sheet1 = workbook.CreateSheet("def");
-            var sheet2 = workbook.CreateSheet("data");
+            var sheet1 = workbook.CreateSheet(AppData.Config.SheetNameForField);
+            var sheet2 = workbook.CreateSheet(AppData.Config.SheetNameForData);
 
             //创建新字体
             var font = workbook.CreateFont();

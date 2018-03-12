@@ -113,6 +113,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="layouts\framework\FrameSettingMore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="layouts\framework\FrameToolBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,6 +191,9 @@
     </Compile>
     <Compile Include="layouts\framework\FrameSetting.xaml.cs">
       <DependentUpon>FrameSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\framework\FrameSettingMore.xaml.cs">
+      <DependentUpon>FrameSettingMore.xaml</DependentUpon>
     </Compile>
     <Compile Include="layouts\framework\FrameToolBar.xaml.cs">
       <DependentUpon>FrameToolBar.xaml</DependentUpon>

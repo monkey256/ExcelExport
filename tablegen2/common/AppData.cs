@@ -14,6 +14,11 @@ namespace tablegen2
         public static void loadConfig()
         {
             Config = JsonConfig.readFromFile<TableGenConfig>("config.json") ?? new TableGenConfig();
+            //修正值
+            if (string.IsNullOrEmpty(Config.SheetNameForField))
+                Config.SheetNameForField = "def";
+            if (string.IsNullOrEmpty(Config.SheetNameForData))
+                Config.SheetNameForData = "data";
         }
         public static void saveConfig()
         {

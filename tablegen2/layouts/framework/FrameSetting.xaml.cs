@@ -15,6 +15,7 @@ namespace tablegen2.layouts
         public event Action ExcelDirChanged;
         public event Action ExportDirChanged;
         public event Action ExportFormatChanged;
+        public event Action MoreSettingEvent;
 
         public FrameSetting()
         {
@@ -101,6 +102,12 @@ namespace tablegen2.layouts
                 return;
             }
             Util.OpenDir(dir);
+        }
+
+        private void btnMoreSetting_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (MoreSettingEvent != null)
+                MoreSettingEvent.Invoke();
         }
     }
 }

@@ -32,24 +32,27 @@ namespace tablegen2.logic
 
         private static void _readDataFromWorkbook(IWorkbook wb, List<TableExcelHeader> headers, List<TableExcelRow> rows)
         {
-            var sheet1 = wb.GetSheet("def");
-            if (sheet1 == null)
-                throw new Exception("def工作簿不存在");
+            var defSheetName = AppData.Config.SheetNameForField;
+            var dataSheetName = AppData.Config.SheetNameForData;
 
-            var sheet2 = wb.GetSheet("data");
+            var sheet1 = wb.GetSheet(defSheetName);
+            if (sheet1 == null)
+                throw new Exception(string.Format("'{0}'工作簿不存在", defSheetName));
+
+            var sheet2 = wb.GetSheet(dataSheetName);
             if (sheet2 == null)
-                throw new Exception("data工作簿不存在");
+                throw new Exception(string.Format("'{0}'工作簿不存在", dataSheetName));
 
             //加载字段
             _readHeadersFromDefSheet(sheet1, headers);
 
             var h1 = headers.Find(a => a.FieldName == "Id");
             if (h1 == null)
-                throw new Exception("def工作簿中不存在Id字段！");
+                throw new Exception(string.Format("'{0}'工作簿中不存在Id字段！", defSheetName));
 
             var h2 = headers.Find(a => a.FieldName == "KeyName");
             if (h2 == null)
-                throw new Exception("def工作簿中不存在KeyName字段！");
+                throw new Exception(string.Format("'{0}'工作簿中不存在KeyName字段！", defSheetName));
 
             //加载数据
             var headers2 = _readHeadersFromDataSheet(sheet2);
@@ -104,7 +107,7 @@ namespace tablegen2.logic
                 if (string.IsNullOrEmpty(str1) && string.IsNullOrEmpty(str2) && string.IsNullOrEmpty(str3))
                     continue;
 
-                if (!string.IsNullOrEmpty(str1) && !string.IsNullOrEmpty(str2) && !string.IsNullOrEmpty(str3))
+                if (!string.IsNullOrEmpty(str1) && !string.IsNullOrEmpty(str2))
                 {
                     headers.Add(new TableExcelHeader()
                     {
@@ -116,7 +119,7 @@ namespace tablegen2.logic
                 }
 
                 throw new Exception(string.Format(
-                    "def工作簿中第{0}行数据异常，有缺失！", row + 1));
+                    "'{0}'工作簿中第{1}行数据异常，有缺失！", AppData.Config.SheetNameForField, row + 1));
             }
         }
         
@@ -139,7 +142,7 @@ namespace tablegen2.logic
             int idx = r.IndexOf(string.Empty);
             if (idx >= 0)
                 throw new Exception(string.Format(
-                    "data工作簿中第1行第{0}列字段名称非法", idx + 1));
+                    "'{0}'工作簿中第1行第{1}列字段名称非法", AppData.Config.SheetNameForData, idx + 1));
             return r;
         }
 
@@ -150,7 +153,7 @@ namespace tablegen2.logic
                 var hd = headers1[i];
                 var idx = headers2.IndexOf(hd.FieldName);
                 if (idx < 0)
-                    throw new Exception(string.Format("data工作簿中不存在字段'{0}'所对应的列", hd.FieldName));
+                    throw new Exception(string.Format("'{0}'工作簿中不存在字段'{1}'所对应的列", AppData.Config.SheetNameForData, hd.FieldName));
                 indexes[i] = idx;
             }
             if (headers1.Count < headers2.Count)
@@ -158,7 +161,7 @@ namespace tablegen2.logic
                 foreach (var s in headers2)
                 {
                     if (headers1.Find(a => a.FieldName == s) == null)
-                        throw new Exception(string.Format("data工作簿中的字段'{0}'在def中无法找到", s));
+                        throw new Exception(string.Format("'{0}'工作簿中的包含多余的数据列'{1}'", AppData.Config.SheetNameForData, s));
                 }
             }
         }
