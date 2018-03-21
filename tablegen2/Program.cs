@@ -24,6 +24,10 @@ namespace tablegen2
             {
                 CommandHelper.processOpenExcelFile();
             }
+            else if (CommandHelper.Command == CommandType.ExportFiles)
+            {
+                CommandHelper.processExportFiles();
+            }
             else
             {
                 App app = new App();

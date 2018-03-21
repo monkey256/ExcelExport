@@ -48,6 +48,9 @@ namespace tablegen2.layouts
 
     * 使用工具查看并编辑指定.exdat（加密数据格式）文件
         tablegen2.exe exdatFullPath.exdat
+
+    * 使用工具将Excel文件或所在的整个目录导出到指定格式的数据文件
+        tablegen2.exe -i excelFullPath|excelDir -o outputDir -t xml|json|lua|dat
 ";
         public HelperPanel()
         {

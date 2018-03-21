@@ -4,6 +4,8 @@ using System.Text;
 using System.Windows;
 using tablegen2.logic;
 using tablegen2.layouts;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace tablegen2
 {
@@ -13,6 +15,7 @@ namespace tablegen2
         Help,
         OpenDatFile,
         OpenExcelFile,
+        ExportFiles,
     }
 
     internal static class CommandHelper
@@ -20,12 +23,17 @@ namespace tablegen2
         //-h|-help|/h|/help
         //fullPath.exdat
         //fullPath.xls|.xlsx
+        //-i excelFullPath|excelDir -o outputDir -t xml|json|lua|dat
 
         public static CommandType Command { get; internal set; }
 
         public static string OpenDatFullPath { get; internal set; }
 
         public static string OpenExcelFullPath { get; internal set; }
+
+        public static string ExportInputPath { get; internal set; }
+        public static string ExportOutputDir { get; internal set; }
+        public static string ExportType { get; internal set; }
 
         static CommandHelper()
         {
@@ -95,6 +103,26 @@ namespace tablegen2
                     }
                 }
                 #endregion
+
+                #region convert excel
+                if (cpy.Length == 6)
+                {
+                    var ps = new Dictionary<string, string>();
+                    ps[cpy[0]] = cpy[1];
+                    ps[cpy[2]] = cpy[3];
+                    ps[cpy[4]] = cpy[5];
+                    var ks = ps.Keys.ToList();
+                    ks.Sort();
+                    if (string.Concat(ks) == "-i-o-t")
+                    {
+                        Command = CommandType.ExportFiles;
+                        ExportInputPath = ps["-i"];
+                        ExportOutputDir = ps["-o"];
+                        ExportType = ps["-t"];
+                        break;
+                    }
+                }
+                #endregion
             } while (false);
         }
 
@@ -106,6 +134,8 @@ namespace tablegen2
             sb.AppendLine("  功能说明：打开并查看.exdat文件");
             sb.AppendLine("2.excelPath");
             sb.AppendLine("  功能说明：打开并查看.xls或.xlsx文件");
+            sb.AppendLine("3.-i excelFullPath|excelDir -o outputDir -t xml|json|lua|dat");
+            sb.AppendLine("  功能说明：将Excel表或整个目录导出指定格式的数据文件");
             MsgBox(sb.ToString());
         }
 
@@ -152,6 +182,99 @@ namespace tablegen2
             App app = new App();
             app.InitializeComponent();
             app.Run((Window)pw);
+        }
+
+        public static void processExportFiles()
+        {
+            var lst = new List<string>();
+            if (Directory.Exists(ExportInputPath))
+            {
+                lst = Directory.GetFiles(ExportInputPath, "*.xls", SearchOption.AllDirectories).ToList();
+                lst.Union(Directory.GetFiles(ExportInputPath, "*.xlsx", SearchOption.AllDirectories));
+            }
+            else if (File.Exists(ExportInputPath))
+            {
+                lst.Add(ExportInputPath);
+            }
+            else
+            {
+                MsgBox("文件或目录不存在！ {0}", ExportInputPath);
+                return;
+            }
+
+            Util.MakesureFolderExist(ExportOutputDir);
+            if (!Directory.Exists(ExportOutputDir))
+            {
+                MsgBox("无法创建目录！ {0}", ExportOutputDir);
+                return;
+            }
+
+            var fmt = TableExportFormat.Unknown;
+            switch (ExportType.ToLower())
+            {
+                case "xml":
+                    fmt = TableExportFormat.Xml;
+                    break;
+                case "json":
+                    fmt = TableExportFormat.Json;
+                    break;
+                case "lua":
+                    fmt = TableExportFormat.Lua;
+                    break;
+                case "dat":
+                    fmt = TableExportFormat.Dat;
+                    break;
+            }
+            if (fmt == TableExportFormat.Unknown)
+            {
+                MsgBox("无法识别的导出格式！ {0}", ExportType);
+                return;
+            }
+
+            foreach (var filePath in lst)
+            {
+                try
+                {
+                    exportFile(filePath, ExportOutputDir, fmt);
+                }
+                catch (System.Exception ex)
+                {
+                    MsgBox("转换文件'{0}'时出错：\n{1}", filePath, ex.Message);
+                    return;
+                }
+            }
+        }
+
+        private static void exportFile(string excelPath, string outputDir, TableExportFormat fmt)
+        {
+            var data = TableExcelReader.loadFromExcel(excelPath);
+            switch (fmt)
+            {
+                case TableExportFormat.Dat:
+                    {
+                        var exportPath = Path.Combine(outputDir, string.Format("{0}.exdat", Path.GetFileNameWithoutExtension(excelPath)));
+                        TableExcelExportDat.exportExcelFile(data, exportPath);
+                    }
+                    break;
+                case TableExportFormat.Json:
+                    {
+                        var exportPath = Path.Combine(outputDir, string.Format("{0}.json", Path.GetFileNameWithoutExtension(excelPath)));
+                        TableExcelExportJson.exportExcelFile(data, exportPath);
+                    }
+                    break;
+                case TableExportFormat.Xml:
+                    {
+                        var exportPath = Path.Combine(outputDir, string.Format("{0}.xml", Path.GetFileNameWithoutExtension(excelPath)));
+                        TableExcelExportXml.exportExcelFile(data, exportPath);
+                    }
+                    break;
+                case TableExportFormat.Lua:
+                    {
+                        var exportPath = Path.Combine(outputDir, string.Format("{0}.lua", Path.GetFileNameWithoutExtension(excelPath)));
+                        TableExcelExportLua.exportExcelFile(data, exportPath);
+                    }
+                    break;
+            }
         }
     }
 }
