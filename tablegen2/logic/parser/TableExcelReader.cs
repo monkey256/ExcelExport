@@ -84,6 +84,9 @@ namespace tablegen2.logic
                     case CellType.Numeric:
                         r = cell.NumericCellValue.ToString();
                         break;
+                    case CellType.Formula:
+                        r = cell.CellFormula;
+                        break;
                     default:
                         r = cell.StringCellValue;
                         break;
